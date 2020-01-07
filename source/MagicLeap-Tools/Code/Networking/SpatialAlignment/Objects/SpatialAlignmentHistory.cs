@@ -47,10 +47,18 @@ namespace MagicLeapTools
 
                 foreach (var item in rotations)
                 {
-                    x += item.x;
-                    y += item.y;
-                    z += item.z;
-                    w += item.w;
+                    if (item.w < 0)
+                    {
+                        x -= item.x;
+                        y -= item.y;
+                        z -= item.z;
+                        w -= item.w;
+                    } else {
+                        x += item.x;
+                        y += item.y;
+                        z += item.z;
+                        w += item.w;
+                    }
                 }
                 float k = 1 / Mathf.Sqrt(x * x + y * y + z * z + w * w);
                 return new Quaternion(x * k, y * k, z * k, w * k);
